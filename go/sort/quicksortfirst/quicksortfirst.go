@@ -15,13 +15,13 @@ func quickSort(slc []int) {
 		return
 	}
 
-	swap := -1
-	pvt := len(slc) - 1
+	swap := len(slc)
+	pvt := 0
 
-	for x := 0; x <= pvt; x++ {
-		if slc[x] <= slc[pvt] {
-			swap++
-			if x > swap {
+	for x := len(slc) - 1; x >= pvt; x-- {
+		if slc[x] >= slc[pvt] {
+			swap--
+			if x < swap {
 				slc[x], slc[swap] = slc[swap], slc[x]
 			}
 		}
@@ -29,7 +29,7 @@ func quickSort(slc []int) {
 
 	high := swap + 1
 
-	if high > len(slc)-1 {
+	if high >= len(slc) {
 		high = len(slc) - 1
 	}
 
