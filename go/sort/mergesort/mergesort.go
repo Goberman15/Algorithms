@@ -10,36 +10,30 @@ func main() {
 }
 
 func merge(slc []int, mid int) {
-	left := make([]int, 0, len(slc))
-	right := make([]int, 0, len(slc))
+	aux := make([]int, len(slc))
+	copy(aux, slc)
 
-	left = append(left, slc[:mid]...)
-	right = append(right, slc[mid:]...)
+	i, j, k := 0, mid, 0
 
-	i, j, k := 0, 0, 0
-
-	for i < len(left) || j < len(right) {
-		if i == len(left) {
-			slc[k] = right[j]
-			j++
-			k++
-			continue
-		}
-
-		if j == len(right) {
-			slc[k] = left[i]
-			i++
-			k++
-			continue
-		}
-
-		if left[i] < right[j] {
-			slc[k] = left[i]
+	for i < mid && j < len(slc) {
+		if aux[i] <= aux[j] {
+			slc[k] = aux[i]
 			i++
 		} else {
-			slc[k] = right[j]
+			slc[k] = aux[j]
 			j++
 		}
+		k++
+	}
+
+	for i < mid {
+		slc[k] = aux[i]
+		i++
+		k++
+	}
+	for j < len(slc) {
+		slc[k] = aux[j]
+		j++
 		k++
 	}
 }
